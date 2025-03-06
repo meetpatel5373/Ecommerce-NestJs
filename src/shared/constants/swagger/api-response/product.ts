@@ -1,5 +1,5 @@
 import { ProductCreateResponseDTO } from 'src/entities/products/dto/product-create-dto/product-create-response.dto';
-import { DeleteProductResponseDTO } from 'src/entities/products/dto/product-delete-dto/delete-product-response.dto';
+import { GetProductByIdResponseDTO } from 'src/entities/products/dto/product-get-by-id-dto/get-product-by-id-response.dto';
 import { UpdateProductResponseDTO } from 'src/entities/products/dto/product-update-dto/update-product-response.dto';
 import { GetAllProductResponseDTO } from 'src/entities/products/dto/products-all-dto/get-product-response.dto';
 
@@ -15,7 +15,7 @@ export const UpdateProductResponse = {
 
 export const DeleteProductResponse = {
   description: 'Delete Product API',
-  type: DeleteProductResponseDTO,
+  type: GetProductByIdResponseDTO,
 };
 
 export const GetAllProductResponse = {

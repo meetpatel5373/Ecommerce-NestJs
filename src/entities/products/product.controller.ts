@@ -161,7 +161,7 @@ export class ProductController {
   @HttpCode(200)
   public async delete(
     @Param('product_id') product_id: string,
-  ): Promise<UpdateProductResponseDTO> {
+  ): Promise<GetProductByIdResponseDTO> {
     return this.productService.delete(product_id);
   }
 }

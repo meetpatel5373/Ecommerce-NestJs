@@ -11,7 +11,6 @@ import { GetAllProductResponseDTO } from './dto/products-all-dto/get-product-res
 import { GetProductByIdResponseDTO } from './dto/product-get-by-id-dto/get-product-by-id-response.dto';
 import { UpdateProductRequestDTO } from './dto/product-update-dto/update-product-request.dto';
 import { UpdateProductResponseDTO } from './dto/product-update-dto/update-product-response.dto';
-import { DeleteProductResponseDTO } from './dto/product-delete-dto/delete-product-response.dto';
 
 @Injectable()
 export class ProductService {
@@ -176,7 +175,7 @@ export class ProductService {
    * * Create Function
    * ? This API is used for create purpose
    */
-  delete = async (product_id: string): Promise<DeleteProductResponseDTO> => {
+  delete = async (product_id: string): Promise<GetProductByIdResponseDTO> => {
     const response = await this.productRepository.findOneBy({
       id: +product_id,
     });
@@ -194,6 +193,6 @@ export class ProductService {
     const result = await this.productRepository.find();
     this.redisService.setKey('products', result);
 
-    return new DeleteProductResponseDTO(response);
+    return new GetProductByIdResponseDTO(response);
   };
 }

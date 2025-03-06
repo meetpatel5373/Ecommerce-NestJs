@@ -6,18 +6,23 @@ import {
 } from 'src/shared/constants/swagger/api-property/default';
 
 import { Product } from '../product.entity';
+import {
+  propsProductName,
+  propsProductPrice,
+  propsProductQuantity,
+} from 'src/shared/constants/swagger/api-property/product';
 
 export class ProductDTO {
   @ApiProperty(propsPrimaryKey)
   readonly id: number;
 
-  @ApiProperty()
+  @ApiProperty(propsProductName)
   readonly name: string;
 
-  @ApiProperty()
+  @ApiProperty(propsProductQuantity)
   readonly quantity: number;
 
-  @ApiProperty()
+  @ApiProperty(propsProductPrice)
   readonly price: number;
 
   @ApiProperty()

@@ -1,19 +1,24 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsNumberString, Validate } from 'class-validator';
+import { IsNotEmpty, IsNumberString } from 'class-validator';
+import {
+  propsProductName,
+  propsProductPrice,
+  propsProductQuantity,
+} from 'src/shared/constants/swagger/api-property/product';
 import { customValidator } from 'src/shared/validate/validator';
 
 export class ProductCreateRequestDTO {
-  @ApiProperty()
+  @ApiProperty(propsProductName)
   @customValidator()
   readonly name: string;
 
-  @ApiProperty()
+  @ApiProperty(propsProductPrice)
   @IsNotEmpty()
   @IsNumberString()
   @customValidator()
   readonly price: string;
 
-  @ApiProperty()
+  @ApiProperty(propsProductQuantity)
   @IsNotEmpty()
   @IsNumberString()
   @customValidator()
