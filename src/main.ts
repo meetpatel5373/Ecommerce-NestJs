@@ -44,6 +44,12 @@ async function bootstrap() {
     fs.readFile('./server-startup.txt', 'utf8', (err, data) => {
       console.log(data);
       console.log('LISTENING ON PORT : ' + Number(configBase().APP_PORT));
+      console.log(
+        '-----------------------------------------------------------',
+      );
+      console.log(
+        'NOTE : USED CUSTOM VALIDATORS THAT IS WHY DID NOT USED TRY CATCH AND GLOBAL EXCEPTION HANDLER',
+      );
     });
   });
 }

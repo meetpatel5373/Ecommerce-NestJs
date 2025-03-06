@@ -6,33 +6,21 @@ import {
   HttpCode,
   Param,
   Post,
-  Put,
   Request,
-  UploadedFile,
   UseFilters,
   UseGuards,
-  UseInterceptors,
 } from '@nestjs/common';
 import { CartService } from './cart.service';
 import {
-  ApiConsumes,
   ApiHeader,
   ApiOkResponse,
   ApiOperation,
   ApiTags,
 } from '@nestjs/swagger';
-
 import { AllExceptionsFilter } from 'src/shared/exception/HttpExceptionFilter';
-
 import { CartCreateRequestDTO } from './dto/cart-create-dto/cart-create-request.dto';
 import { CartCreateResponseDTO } from './dto/cart-create-dto/cart-create-response.dto';
-import { FileInterceptor } from '@nestjs/platform-express';
-import { FileValidationPipe } from 'src/shared/validate/files/file-required-validation';
 import { JwtAuthGuard } from 'src/shared/guards/jwt.auth';
-import { AbilitiesGuard } from 'src/shared/ability/ability.guard';
-import { CheckAbility } from 'src/shared/ability/ability.decorator';
-import { Action } from 'src/shared/enum/roles';
-import { Cart } from './cart.entity';
 import { GetCartByUserIdResponseDTO } from './dto/cart-get-by-id-dto/get-cart-by-user-id-response.dto';
 
 import {

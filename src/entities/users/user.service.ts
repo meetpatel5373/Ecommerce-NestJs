@@ -1,9 +1,8 @@
-import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { User } from './user.entity';
 import { UserRegisterRequestDTO } from './dto/user-register-dto/user-register-request.dto';
 import { UserRegisterResponseDTO } from './dto/user-register-dto/user-register-response.dto';
 import * as bcrypt from 'bcrypt';
-import jsonwebtoken from 'jsonwebtoken';
 import { JwtService } from '@nestjs/jwt';
 
 import { UserLoginRequestDTO } from './dto/user-login-dto/user-login-request.dto';
