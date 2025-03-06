@@ -66,6 +66,8 @@ The server will start at http://localhost:3000/
 API Documentation (Swagger)
 After starting the server, access Swagger documentation at:
 http://localhost:3000/documentation#/
+username : Admin
+password : ENV Variable
 
 Swagger is auto-generated based on the defined DTOs and API decorators.
 
