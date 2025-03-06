@@ -9,10 +9,12 @@ import {
 } from '@casl/ability';
 import { User } from 'src/entities/users/user.entity';
 import { Product } from 'src/entities/products/product.entity';
+import { Cart } from 'src/entities/carts/cart.entity';
 
 export type subjects =
   | InferSubjects<typeof User>
   | InferSubjects<typeof Product>
+  | InferSubjects<typeof Cart>
   | 'all';
 
 export type AppAbility = PureAbility<[Action, subjects]>;

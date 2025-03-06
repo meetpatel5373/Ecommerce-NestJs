@@ -12,3 +12,8 @@ export const propsProductQuantity = {
   description: 'Product Quantity',
   example: '25',
 };
+
+export const propsProductId = {
+  description: 'Product Id',
+  example: '1',
+};

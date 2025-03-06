@@ -97,7 +97,7 @@ export class ProductController {
 
   /**
    * --------------------------------------------------------------------------------
-   * * Get All Product API
+   * * Get Product by Id API
    * ? This API is used for retrieve all the products
    */
   @Get(':product_id')

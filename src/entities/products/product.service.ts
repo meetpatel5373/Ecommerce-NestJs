@@ -125,8 +125,8 @@ export class ProductService {
   };
 
   /**
-   * * Create Function
-   * ? This API is used for create purpose
+   * * Get All Function
+   * ? This API is used for getAll purpose
    */
   getAll = async (): Promise<GetAllProductResponseDTO> => {
     const cachedData = await this.redisService.getKey('products');
@@ -141,8 +141,8 @@ export class ProductService {
   };
 
   /**
-   * * Create Function
-   * ? This API is used for create purpose
+   * * Get By Id Function
+   * ? This API is used for Get By Id purpose
    */
   getById = async (product_id: string): Promise<GetProductByIdResponseDTO> => {
     const response = await this.productRepository.findOneBy({
@@ -157,11 +157,11 @@ export class ProductService {
   };
 
   /**
-   * * Retrieving user by name Function
+   * * Retrieving product by name Function
    * @param name:string,
-   * ? This API is used for Retrieving User by name purpose
+   * ? This API is used for Retrieving product by name purpose
    */
-  getUserByName = async (name: string): Promise<Product> => {
+  getProductByName = async (name: string): Promise<Product> => {
     const productData = await this.productRepository.findOneBy({ name: name });
 
     if (productData == null) {
@@ -172,8 +172,8 @@ export class ProductService {
   };
 
   /**
-   * * Create Function
-   * ? This API is used for create purpose
+   * * Delete Function
+   * ? This API is used for Delete purpose
    */
   delete = async (product_id: string): Promise<GetProductByIdResponseDTO> => {
     const response = await this.productRepository.findOneBy({
@@ -194,5 +194,13 @@ export class ProductService {
     this.redisService.setKey('products', result);
 
     return new GetProductByIdResponseDTO(response);
+  };
+
+  getAvailableQuantityById = async (product_id: string) => {
+    const response = await this.productRepository.findOneBy({
+      id: +product_id,
+    });
+
+    return response ? response.quantity : 0;
   };
 }

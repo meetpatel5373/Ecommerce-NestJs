@@ -12,8 +12,7 @@ import { ConfigModule } from '@nestjs/config';
 import { ProductModule } from './entities/products/product.module';
 import { CacheModule } from '@nestjs/cache-manager';
 import * as redisStore from 'cache-manager-redis-store';
-import { APP_GUARD } from '@nestjs/core';
-import { AbilitiesGuard } from './shared/ability/ability.guard';
+import { CartModule } from './entities/carts/cart.module';
 
 @Module({
   imports: [
@@ -35,6 +34,7 @@ import { AbilitiesGuard } from './shared/ability/ability.guard';
     SharedModule,
     UserModule,
     ProductModule,
+    CartModule,
   ],
   controllers: [AppController],
   providers: [AppService, JwtStrategy],

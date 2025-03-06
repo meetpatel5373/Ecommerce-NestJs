@@ -4,7 +4,8 @@ import { config } from 'src/config';
 import { User } from 'src/entities/users/user.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Product } from 'src/entities/products/product.entity';
-const entities = TypeOrmModule.forFeature([User, Product]);
+import { Cart } from 'src/entities/carts/cart.entity';
+const entities = TypeOrmModule.forFeature([User, Product, Cart]);
 @Global()
 @Module({
   imports: [entities],

@@ -7,6 +7,7 @@ import { PasswordMatchValidation } from './passwords';
 import { CorrectUserPasswordValidation } from './users/correct-user-password-validation';
 import { ProductExistValidation } from './products/product-name-validation';
 import { NonNegativeValidation } from './products/non-negative-validation';
+import { QuantityValidation } from './carts/quantity-check-validation';
 
 export function customValidator(
   property?: string,
@@ -57,6 +58,10 @@ export function customValidator(
 
       case 'quantity':
         validateClass = NonNegativeValidation;
+        break;
+
+      case 'product_id|quantity':
+        validateClass = QuantityValidation;
         break;
 
       default:
