@@ -13,6 +13,7 @@ import { ProductModule } from './entities/products/product.module';
 import { CacheModule } from '@nestjs/cache-manager';
 import * as redisStore from 'cache-manager-redis-store';
 import { CartModule } from './entities/carts/cart.module';
+import { OrderModule } from './entities/orders/order.module';
 
 @Module({
   imports: [
@@ -35,6 +36,7 @@ import { CartModule } from './entities/carts/cart.module';
     UserModule,
     ProductModule,
     CartModule,
+    OrderModule,
   ],
   controllers: [AppController],
   providers: [AppService, JwtStrategy],

@@ -56,7 +56,7 @@ export class ProductController {
    * @param quantity:string,
    * @param price:string,
    * @param image:string,
-   * ? This API is used for Register purpose
+   * ? This API is used for Create purpose
    */
   @Post()
   @ApiOkResponse(CreateProductResponse)

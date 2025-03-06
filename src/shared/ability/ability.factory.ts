@@ -10,11 +10,15 @@ import {
 import { User } from 'src/entities/users/user.entity';
 import { Product } from 'src/entities/products/product.entity';
 import { Cart } from 'src/entities/carts/cart.entity';
+import { Order } from 'src/entities/orders/order.entity';
+import { OrderItems } from 'src/entities/order-items/order-item.entity';
 
 export type subjects =
   | InferSubjects<typeof User>
   | InferSubjects<typeof Product>
   | InferSubjects<typeof Cart>
+  | InferSubjects<typeof Order>
+  | InferSubjects<typeof OrderItems>
   | 'all';
 
 export type AppAbility = PureAbility<[Action, subjects]>;
@@ -52,6 +56,8 @@ export class AppAbilityFactory {
       cannot(Action.Update, Product);
       cannot(Action.Create, Product);
       cannot(Action.Delete, Product);
+      cannot(Action.ReadAll, Order);
+      cannot(Action.ReadAll, OrderItems);
     }
 
     return build({

@@ -81,7 +81,7 @@ export class CartService {
     });
 
     if (!response) {
-      throw new NotFoundException('cart not found');
+      throw new NotFoundException('cart is empty');
     }
 
     let result = [];

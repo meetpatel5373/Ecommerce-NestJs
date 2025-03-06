@@ -5,7 +5,17 @@ import { User } from 'src/entities/users/user.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Product } from 'src/entities/products/product.entity';
 import { Cart } from 'src/entities/carts/cart.entity';
-const entities = TypeOrmModule.forFeature([User, Product, Cart]);
+import { Order } from 'src/entities/orders/order.entity';
+import { OrderItems } from 'src/entities/order-items/order-item.entity';
+
+const entities = TypeOrmModule.forFeature([
+  User,
+  Product,
+  Cart,
+  Order,
+  OrderItems,
+]);
+
 @Global()
 @Module({
   imports: [entities],
