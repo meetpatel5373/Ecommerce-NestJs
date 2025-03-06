@@ -9,6 +9,11 @@ import { JwtStrategy } from './shared/guards/auth.guard';
 import { UserModule } from './entities/users/user.module';
 import { DatabaseModule } from './database/database.module';
 import { ConfigModule } from '@nestjs/config';
+import { ProductModule } from './entities/products/product.module';
+import { CacheModule } from '@nestjs/cache-manager';
+import * as redisStore from 'cache-manager-redis-store';
+import { APP_GUARD } from '@nestjs/core';
+import { AbilitiesGuard } from './shared/ability/ability.guard';
 
 @Module({
   imports: [
@@ -19,9 +24,17 @@ import { ConfigModule } from '@nestjs/config';
       secret: config().JWT_SECRET_KEY,
       signOptions: { expiresIn: '30d' },
     }),
+    CacheModule.register({
+      isGlobal: true,
+      store: redisStore,
+      host: 'localhost',
+      port: 6379,
+      ttl: 86400,
+    }),
     PassportModule,
     SharedModule,
     UserModule,
+    ProductModule,
   ],
   controllers: [AppController],
   providers: [AppService, JwtStrategy],

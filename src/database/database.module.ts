@@ -1,10 +1,13 @@
 import { DataSource } from 'typeorm';
 import { Global, Module } from '@nestjs/common';
 import { config } from 'src/config';
-
+import { User } from 'src/entities/users/user.entity';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { Product } from 'src/entities/products/product.entity';
+const entities = TypeOrmModule.forFeature([User, Product]);
 @Global()
 @Module({
-  imports: [],
+  imports: [entities],
   providers: [
     {
       provide: DataSource,
@@ -30,6 +33,6 @@ import { config } from 'src/config';
       },
     },
   ],
-  exports: [DataSource],
+  exports: [entities, DataSource],
 })
 export class DatabaseModule {}

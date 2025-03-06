@@ -5,6 +5,7 @@ import { AppAbilityFactory } from './ability/ability.factory';
 import { AwsService } from './aws-upload/aws.service';
 import { HelperService } from './services/common.service';
 import { ValidationService } from './services/validation.service';
+import { RedisService } from './redis/redis.service';
 
 @Global()
 @Module({
@@ -19,6 +20,7 @@ import { ValidationService } from './services/validation.service';
     ValidationService,
 
     AwsService,
+    RedisService,
   ],
   exports: [
     AppAbilityFactory,
@@ -27,6 +29,7 @@ import { ValidationService } from './services/validation.service';
     HelperService,
     ValidationService,
     AwsService,
+    RedisService,
   ],
   controllers: [],
 })

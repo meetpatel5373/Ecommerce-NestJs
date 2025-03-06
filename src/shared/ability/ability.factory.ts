@@ -8,14 +8,18 @@ import {
   ExtractSubjectType,
 } from '@casl/ability';
 import { User } from 'src/entities/users/user.entity';
+import { Product } from 'src/entities/products/product.entity';
 
-export type subjects = InferSubjects<typeof User> | 'all';
+export type subjects =
+  | InferSubjects<typeof User>
+  | InferSubjects<typeof Product>
+  | 'all';
 
 export type AppAbility = PureAbility<[Action, subjects]>;
 
 @Injectable()
 export class AppAbilityFactory {
-  async defineAbilityFor() {
+  async defineAbilityFor(user: User) {
     const { can, cannot, build } = new AbilityBuilder<AppAbility>(
       PureAbility as AbilityClass<AppAbility>,
     );
@@ -38,7 +42,15 @@ export class AppAbilityFactory {
      ** Cannot : Used to remove access to the module
      *
      */
-    can(Action.Manage, 'all');
+
+    if (user.role == '1') {
+      can(Action.Manage, 'all'); // Full access to everything
+    } else {
+      can(Action.Read, Product);
+      cannot(Action.Update, Product);
+      cannot(Action.Create, Product);
+      cannot(Action.Delete, Product);
+    }
 
     return build({
       detectSubjectType: (item) =>

@@ -12,6 +12,7 @@ import { GetUserByIdResponseDTO } from './dto/user-get-by-id-dto/get-user-by-id-
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Roles } from 'src/shared/enum/roles';
+import { config } from 'src/config';
 
 const salt = bcrypt.genSaltSync(10);
 
@@ -57,6 +58,7 @@ export class UserService {
     const authTokens = await this.generateTokens({
       id: response.id,
       email: response.email,
+      role: createdRecord.role,
     });
 
     return new UserRegisterResponseDTO(
@@ -78,10 +80,11 @@ export class UserService {
     const userData = await this.userRepository.findOne({
       where: { email: reqData.email },
     });
-
+    console.log('userData :>> ', userData);
     const authTokens = await this.generateTokens({
       id: userData.id,
       email: userData.email,
+      role: userData.role,
     });
 
     return new UserLoginResponseDTO(
@@ -122,22 +125,26 @@ export class UserService {
     return new GetUserByIdResponseDTO(userData);
   };
 
+  /**
+   * * Retrieve Refreshed tokens
+   */
   generateTokens = async (user: {
     id: number;
     email: string;
+    role: string;
   }): Promise<{
     accessToken: string;
     refreshToken: string;
   }> => {
-    const payload = { userId: user.id, email: user.email };
+    const payload = { userId: user.id, email: user.email, role: user.role };
 
     const token = this.jwtService.sign(payload, {
-      secret: process.env.JWT_SECRET_KEY,
+      secret: config().JWT_SECRET_KEY,
       expiresIn: '24h',
     });
 
     const refreshToken = this.jwtService.sign(payload, {
-      secret: process.env.JWT_SECRET_REFRESH_KEY,
+      secret: config().JWT_SECRET_REFRESH_KEY,
       expiresIn: '7d',
     });
 
@@ -147,16 +154,25 @@ export class UserService {
     };
   };
 
-  async refreshToken(refreshToken: string) {
+  refreshToken = async (
+    refreshToken: string,
+  ): Promise<{
+    accessToken: string;
+    refreshToken: string;
+  }> => {
     try {
       const payload = this.jwtService.verify(refreshToken, {
-        secret: process.env.JWT_SECRET_REFRESH_KEY,
+        secret: config().JWT_SECRET_REFRESH_KEY,
       });
 
       // Generate new tokens
-      return this.generateTokens({ id: payload.id, email: payload.email });
+      return this.generateTokens({
+        id: payload.id,
+        email: payload.email,
+        role: payload.role,
+      });
     } catch (error) {
       throw new UnauthorizedException('Invalid or expired refresh token');
     }
-  }
+  };
 }

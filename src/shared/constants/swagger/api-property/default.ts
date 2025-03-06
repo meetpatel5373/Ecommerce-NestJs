@@ -16,11 +16,11 @@ export const propsPrimaryKey = {
 };
 
 export const propsFirstCreatedAt = {
-  description: 'Admin created Date',
+  description: 'created Date',
   example: '2023-04-25T11:41:55.772Z',
 };
 
 export const propsLastModifiedAt = {
-  description: 'Admin Modified Date',
+  description: 'Modified Date',
   example: '2023-04-25T11:41:55.772Z',
 };

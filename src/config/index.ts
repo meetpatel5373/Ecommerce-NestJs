@@ -1,4 +1,5 @@
 export const config = (): EnvironmentVariables => ({
+  APP_ENV: process.env.APP_ENV,
   APP_PORT: process.env.PORT,
   DB_PORT: parseInt(process.env.DB_PORT),
   DB_HOST: process.env.DB_HOST,
@@ -7,6 +8,7 @@ export const config = (): EnvironmentVariables => ({
   DB_USERNAME: process.env.DB_USERNAME,
   SWAGGER_PASSWORD: process.env.SWAGGER_PASSWORD,
   JWT_SECRET_KEY: process.env.JWT_SECRET_KEY,
+  JWT_SECRET_REFRESH_KEY: process.env.JWT_SECRET_REFRESH_KEY,
   ALLOW_ORIGINS: process.env.ALLOW_ORIGINS,
   ALLOW_METHODS: process.env.ALLOW_METHODS,
   ALLOW_HEADERS: process.env.ALLOW_HEADERS,
@@ -19,6 +21,7 @@ export const config = (): EnvironmentVariables => ({
 });
 
 export interface EnvironmentVariables {
+  APP_ENV: string;
   APP_PORT: string;
   DB_PORT: number;
   DB_HOST: string;
@@ -27,6 +30,7 @@ export interface EnvironmentVariables {
   DB_NAME: string;
   SWAGGER_PASSWORD: string;
   JWT_SECRET_KEY: string;
+  JWT_SECRET_REFRESH_KEY: string;
   ALLOW_ORIGINS: string;
   ALLOW_METHODS: string;
   ALLOW_HEADERS: string;
